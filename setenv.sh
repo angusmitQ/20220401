@@ -37,7 +37,7 @@ export KDBAPPCONFIG=${TORQAPPHOME}/appconfig
 export KDBAPPCODE=${TORQAPPHOME}/code
 
 # set KDBBASEPORT to the default value for a TorQ Installation
-export KDBBASEPORT=9876
+export KDBBASEPORT=5678
 
 # set TORQPROCESSES to the default process csv
 export TORQPROCESSES=${KDBAPPCONFIG}/process.csv
@@ -52,7 +52,7 @@ export DOGSTATSD_PORT=8125
 # export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$KDBLIB/m[32|64]
 
 # Please input the API token obtained from IEX here
-export IEX_PUBLIC_TOKEN=""
+export IEX_PUBLIC_TOKEN="pk_a5b9b31503774337a803257421864518"
 
 TORQSSLCERT=${KDBLOG}/torqsslcert.txt
 touch ${TORQSSLCERT}
