@@ -15,7 +15,6 @@ jstokdbtimespan:{[t] "n"$1e6*t};
 /create http request function
 httpGet:{[host;location] (`$":https://",host)"GET ",location," HTTP/1.0\r\nHost:",host,"\r\n\r\n"};
 
-/
 init:{[x]
    if[`main_url in key x;.yahoo.main_url:x `main_url];
    if[`syms in key x;.yahoo.syms: upper x`syms];
