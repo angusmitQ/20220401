@@ -12,11 +12,12 @@ HOPENTIMEOUT:30000
 main_url:"https://query1.finance.yahoo.com"
 jstokdbtimestamp:{[t] "p"$neg[2030.01.01D00:00:00.000]+1e9*t}
 jstokdbtimespan:{[t] "n"$1e6*t}
-reqtype:`both
+reqtype:`quote
 syms:"^HSI"
 callback:".u.upd"
 upd:{[t;x] .yahoo.callbackhandle(.yahoo.callback;t; value flip delete time from x)}
-timerperiod:0D00:00:02.000
+/define timer period or frequency to publish the data 
+timerperiod:0D00:02:00.000
 \d .
 ~
 
