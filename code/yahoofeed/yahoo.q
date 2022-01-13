@@ -8,8 +8,10 @@ callback:@[value;`callback;".u.upd"];
 callbackhandle:@[value;`callbackhandle;0i];
 callbackconnection:@[value;`callbackconnection;`];
 upd:@[value;`upd;{{[t;x].yahoo.callbackhandle(.yahoo.callback;t; value flip x)}}];
-timerperiod:@[value;`timerperiod;0D00:00:02.000];
+timerperiod:@[value;`timerperiod;0D00:02:00.000];
+/convert timestamp from json to q format
 jstokdbtimestamp:{[t] "p"$neg[2030.01.01D00:00:00.000]+1e9*t};
+/convert timespan from json to q format
 jstokdbtimespan:{[t] "n"$1e6*t};
 
 /create http request function
@@ -37,7 +39,10 @@ get_data:{[syms]
    }
 
 get_quote:{[syms]
-   first select time:jstokdbtimestamp[regularMarketTime],sym:`$symbol,bid:regularMarketPrice,ask:regularMarketPrice,bsize:0N,asize:0N,mode:0Nc,ex:0Nc,src:`$exchange from .yahoo.get_data[syms]
+   /select parsed data to match quote schema in RDB
+   tab: select time:.yahoo.jstokdbtimestamp[regularMarketTime],sym:`$symbol,bid:regularMarketPrice,ask:regularMarketPrice,bsize:0N,asize:0N,mode:0Nc,ex:0Nc,src:`$exchange from .yahoo.get_data[syms];
+   /publish to rdb
+   .yahoo.upd[`quote;tab]
    }
 
 
